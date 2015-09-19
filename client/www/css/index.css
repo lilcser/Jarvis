@@ -13,13 +13,11 @@ body {
 }
 .navbar-header h1 {
     font-size: 25px;
-    text-align: left;
     display: inline-block;
 }
 
 .glyphicon glyphicon-refresh {
-    font-size: 10px;
-    display: block
+    display: inline-block;
 }
 
 #mainPage {
