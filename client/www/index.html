@@ -15,12 +15,12 @@
     </head>
     
     <body ng-app="htn2015" ng-controller="MainCtrl">
-        
+        <!--
         <script>
             var duration = 0.5; 
             nativetransitions.fade(duration, onComplete);
         </script>
-        
+-->
         <a href="angular-html-test.html">click here</a>
         
         <div class="app">
@@ -48,17 +48,16 @@
                 </ul>
             </div>
             
-            <div class="row" ng-if="false">
+        <div class="row" ng-hide="true">
             <div id="detailPage">
                 <div id="resultDiv"></div>
                 <div>
-                    <input type="text" id="messageInput" value="Hello"/>
-                    <button ng-click="sendData()">Send</button>
+                    <input ng-model="val" type="text" id="messageInput" value="Hello"/>
+                    <button ng-click="sendData(val)">Send</button>
                 </div>
                 <button ng-click="getPath()">Disconnect</button>
             </div>
             <div id="statusDiv"></div>
-        </div>
         </div>
             
         <script type="text/javascript" src="cordova.js"></script>

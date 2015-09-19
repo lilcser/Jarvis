@@ -67,7 +67,6 @@ app.controller('MainCtrl', function ($timeout, $interval, $scope, $http, $rootSc
     }
     else if(distanceRemaining < 0.1){
       //todo: flash light
-      );
       currentStep++;
     }
     else if(distanceRemaining > previousDistance)
@@ -90,8 +89,8 @@ app.controller('MainCtrl', function ($timeout, $interval, $scope, $http, $rootSc
       var c = 2 * Math.atan2( Math.sqrt(a), Math.sqrt(1-a) ) 
       return 6373 * c;
   }
-  $scope.sendData = function(){
-    bluetoothSerial.write('a', success, failure);
+  $scope.sendData = function(data){
+    bluetoothSerial.write(data, success, failure);
 
     function success(){
         console.log('data sent successfully');
