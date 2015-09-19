@@ -1,0 +1,86 @@
+body {
+    font-family: 'Poiret One';
+    color: #f8f8f8;
+    background-image: url(../image/view.jpg);
+    background-size: 360px 567px;
+    -webkit-appearance: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-touch-callout: none; -webkit-user-select: none;
+}
+.w80{
+    width:80%;
+}
+.navbar-header h1 {
+    text-align: center;
+    font-size: 25px;
+    display: inline-block;
+}
+
+/*.glyphicon glyphicon-refresh {
+    display: inline-block;
+}*/
+
+#mainPage {
+    color: #161616;
+    text-align: center;
+    width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#detailPage {
+    text-align:center;
+    font-size: 2em;
+}
+
+#detailPage div {
+    margin: 20px;
+}
+
+ul {
+    text-align: left;
+}
+
+li {
+    margin-left: -40px;
+    padding: 10px;
+    border: 1px solid #d3d3d3;
+    font-size: 0.9em;
+    background-color:rgb(192,192,192); opacity: 0.8;
+}
+#resultDiv {
+    font: 16px "Source Sans", helvetica, arial, sans-serif;
+    font-weight: 200;
+    display: block;
+    -webkit-border-radius: 6px;
+    width: 100%;
+    height: 140px;
+    text-align: left;
+    overflow: auto;
+}
+
+#statusDiv {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.fadein {
+  opacity: 1;
+  -webkit-transition: opacity 1s ease-in;
+}
+
+.fadeout {
+  opacity: 0;
+  -webkit-transition: opacity 1s ease-out;
+}
+.top-buffer{
+    margin-top:20px;
+}
+/* iPhone 5s */
+@media screen and (device-aspect-ratio: 40/71) {
+    h1 {
+        font-size: 1.6em;
+        padding-top: 15px;
+    }
+}
