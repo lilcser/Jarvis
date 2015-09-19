@@ -7,8 +7,7 @@
         
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href='http://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
-        
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <link rel="stylesheet" href="css/font-awesome.min.css">        <link rel="stylesheet" type="text/css" href="css/index.css" />
         <script src="js/angular.min.js"></script>
         
         <title>Bluetooth Serial Chat</title>
@@ -21,12 +20,18 @@
             nativetransitions.fade(duration, onComplete);
         </script>
         -->
-        <div ng-hide="true">
-            <div class="row">
-                <div class="col-md-6">
-                    <h1>MY DEVICES</h1>
-                    <a class="button" ng-click"refresh()"><img src="image/refresh.svg" height="20px" width="20px"/></a>
-                 </div>
+        <div class="app">
+            <div class="navbar navbar-defult navbar-fixed-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <h1>MY DEVICES</h1>
+                        <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        
             </div>
         
             <div id="mainPage">
@@ -39,16 +44,17 @@
                     </li>
                 </ul>
             </div>
-        </div>
-        <div class="container" ng-hide="false">
-            <div>
-                Some Text Goes here. What does it look like?
-            </div>
+        
+        <div class="container w80" ng-hide="false">
             <div id="detailPage">
-                <div id="resultDiv"></div>
-                <div class="container">
+                <div class="row">
+                    Where would you like to go?
+                </div>
+                <div class="row">
                     <input ng-model="val" type="text" class="form-control"/>
-                    <button type="button" class="btn btn-primary btn-block top-buffer" ng-click="sendData(val)">Send</button>
+                </div>
+                <div class="row">
+                    <button type="button" class="btn btn-primary btn-block" ng-click="sendData(val)">Send</button>
                 </div>
                 <!--<button type="button" class="btn btn-primary" ng-click="getPath()">Disconnect</button>-->
             </div>
