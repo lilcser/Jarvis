@@ -15,44 +15,40 @@
     </head>
     
     <body ng-app="htn2015" ng-controller="MainCtrl">
-        
+        <!--
         <script>
             var duration = 0.5; 
             nativetransitions.fade(duration, onComplete);
         </script>
-        
-        <a href="angular-html-test.html">click here</a>
-        
-        <div class="app">
-            <div class="row">
-                <div class="col-md-6">
-                    <h1>MY DEVICES</h1>
-                    <a class="button" ng-click"refresh()"><img src="css/image/refresh.svg" height="20px" width="20px"/></a>
-                 </div>
-            </div>
-        
-            <div id="mainPage">
-                <ul class="nav nav-tabs">
-                    <li ng-repeat="device in bluetoothList track by $index">
-                        <div ng-click="addDevice(device.address, $index)" >
-                            <div style="float:left;">{{device.name}}</div>
-                            <div style="text-align:right">{{device.address}}</div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+        -->
+        <div class="row">
+            <div class="col-md-6">
+                <h1>MY DEVICES</h1>
+                <a class="button" ng-click"refresh()"><img src="image/refresh.svg" height="20px" width="20px"/></a>
+             </div>
+        </div>
+    
+        <div id="mainPage">
+            <ul class="nav nav-tabs">
+                <li ng-repeat="device in bluetoothList track by $index">
+                    <div ng-click="addDevice(device.address, $index)" >
+                        <div style="float:left;">{{device.name}}</div>
+                        <div style="text-align:right">{{device.address}}</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
             
-            <div class="row" ng-if="false">
+        <div class="row" ng-hide="true">
             <div id="detailPage">
                 <div id="resultDiv"></div>
                 <div>
-                    <input type="text" id="messageInput" value="Hello"/>
-                    <button ng-click="sendData()">Send</button>
+                    <input ng-model="val" type="text" id="messageInput" value="Hello"/>
+                    <button ng-click="sendData(val)">Send</button>
                 </div>
                 <button ng-click="getPath()">Disconnect</button>
             </div>
             <div id="statusDiv"></div>
-        </div>
         </div>
             
         <script type="text/javascript" src="cordova.js"></script>
