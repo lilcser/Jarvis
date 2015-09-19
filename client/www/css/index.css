@@ -1,5 +1,5 @@
 body {
-    font-family: 'Poiret One";
+    font-family: 'Poiret One';
     color: #f8f8f8;
     background-image: url(../image/view.jpg);
     background-size: 360px 567px;
@@ -11,13 +11,11 @@ body {
 
 .navbar-header h1 {
     font-size: 25px;
-    text-align: left;
     display: inline-block;
 }
 
 .glyphicon glyphicon-refresh {
-    font-size: 10px;
-    display: block
+    display: inline-block;
 }
 
 button {
