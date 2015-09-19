@@ -41,9 +41,8 @@ app.controller('MainCtrl', function ($timeout, $interval, $scope, $http, $rootSc
   // }, false);
   function onDeviceReady(){
     console.log('on device ready');
-    watchID = navigator.geolocation.watchPosition(onLocationChange, onError, {enableHighAccuracy: true});
+    watchID = navigator.geolocation.watchPosition(onLocationChange, onLocationChangeError, {enableHighAccuracy: true});
     bluetoothSerial.discoverUnpaired(success, failure);
-    smsInboxPlugin = cordova.require('cordova/plugin/smsinboxplugin');
     function success(list){
         console.log(list);
         $scope.bluetoothList = list;
@@ -63,27 +62,25 @@ app.controller('MainCtrl', function ($timeout, $interval, $scope, $http, $rootSc
       position.coords.longitude,
       travelData[currentStep].end_location.lng
       );
-    if(distanceRemaining < 0.5){
+    if(distanceRemaining < 0.3){
       //todo:flash light
     }
     else if(distanceRemaining < 0.1){
-      distanceRemaining = calculateDistance(
-        position.coords.latitude,
-        travelData[currentStep].end_location.lat,
-        position.coords.longitude,
-        travelData[currentStep].end_location.lng
+      //todo: flash light
       );
       currentStep++;
-      //todo:stop flashing light
     }
     else if(distanceRemaining > previousDistance)
-      offCourse++
+      offCourse++;
       if(offCourse >= 5){
         $scope.getPath();
         currentStep = 0;
         offCourse = 0;
       }
 
+  }
+  function onLocationChangeError(){
+    console.log('error on location change');
   }
   // Haversine Formula for calculating distances
   function calculateDistance(lat1, lat2, lon1, lon2){
@@ -142,7 +139,16 @@ app.controller('MainCtrl', function ($timeout, $interval, $scope, $http, $rootSc
               url: googleURL + "origin=" + startPosition.latitude + ',' + startPosition.longitude + '&destination=' + encodedVal + '&mode=bicycling&key=AIzaSyC8BVV9FTVj5K4S5a05ammUKclM4MkIqyo'
             }).success(function(data) {
               console.log("google direction data:", data);
-              travelData = data.routes.legs[0].steps;
+              console.log(SMS);
+              travelData = data.routes[0].legs[0].steps;
+              if(SMS) SMS.startWatch(function(){
+                  console.log('watching started');
+                  document.addEventListener('onSMSArrive', function(e){
+                  console.log('i found a text message!');
+                  });
+              }, function(){
+                  console.log('failed to start watching');
+              });
             });
   }
   function direction(nextStep) {
