@@ -16,17 +16,6 @@ h1 {
     display: inline-block;
 }
 
-button {
-    margin: 15px;
-    -webkit-appearance:none;
-    display: inline-block;
-}
-
-input[type=text] {
-    font-size: 0.6em;
-    width: 45%;
-}
-
 #mainPage {
     text-align: center;
 }
@@ -38,11 +27,6 @@ input[type=text] {
 
 #detailPage div {
     margin: 20px;
-}
-
-#detailPage button {
-    margin-top: 40px;
-    font-size: 0.6em; /* undo 2em from parent */
 }
 
 ul {
@@ -59,13 +43,6 @@ li {
     border-top: 1px solid #d3d3d3;
     font-size: 0.9em;
 }
-
-button {
-    -webkit-appearance: none;
-    font-size: 1.5em;
-    border-radius: 0;
-}
-
 #resultDiv {
     font: 16px "Source Sans", helvetica, arial, sans-serif;
     font-weight: 200;
@@ -91,15 +68,13 @@ button {
   opacity: 0;
   -webkit-transition: opacity 1s ease-out;
 }
-
+.top-buffer{
+    margin-top:20px;
+}
 /* iPhone 5s */
 @media screen and (device-aspect-ratio: 40/71) {
     h1 {
         font-size: 1.6em;
         padding-top: 15px;
-    }
-
-    input[type=text] {
-        font-size: 0.5em;
     }
 }
