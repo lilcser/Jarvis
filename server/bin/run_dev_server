@@ -1,0 +1,5 @@
+// Initialization
+process.env.NODE_ENV = 'development';
+
+// Start server
+var server = require('../server');
