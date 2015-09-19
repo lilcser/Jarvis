@@ -1,30 +1,48 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' * ws://localhost:35729 data: gap: https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *;script-src 'self' localhost:35729 'unsafe-eval' 'unsafe-inline';">
         <meta charset="utf-8" />
         <meta name="format-detection" content="telephone=no" />
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1,  target-densitydpi=device-dpi" />
-
+        
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href='http://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+        
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <script src="js/angular.min.js"></script>
+        
         <title>Bluetooth Serial Chat</title>
     </head>
-    <body  ng-app="htn2015" ng-controller="MainCtrl">
+    
+    <body ng-app="htn2015" ng-controller="MainCtrl">
+        
+        <script>
+            var duration = 0.5; 
+            nativetransitions.fade(duration, onComplete);
+        </script>
+        
         <a href="angular-html-test.html">click here</a>
+        
         <div class="app">
-            <h1>Select Your Device</h1>
-            <div id="mainPage">
-                <ul id="deviceList">
-                        <li ng-repeat="device in bluetoothList track by $index">
-                            <div  ng-click="addDevice(device.address, $index)" >
-                                <div style="float:left;">{{device.name}}</div>
-                                <div style="text-align:right">{{device.address}}</div>
-                            </div>
-                        </li>
-                </ul>
-                <button ng-click"refresh()">Refresh</button>
+            <div class="row">
+                <div class="col-md-6">
+                    <h1>MY DEVICES</h1>
+                    <a class="button" ng-click"refresh()"><img src="css/image/refresh.svg" height="20px" width="20px"/></a>
+                 </div>
             </div>
+        
+            <div id="mainPage">
+                <ul class="nav nav-tabs">
+                    <li ng-repeat="device in bluetoothList track by $index">
+                        <div ng-click="addDevice(device.address, $index)" >
+                            <div style="float:left;">{{device.name}}</div>
+                            <div style="text-align:right">{{device.address}}</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="row" ng-if="false">
             <div id="detailPage">
                 <div id="resultDiv"></div>
                 <div>
@@ -35,6 +53,8 @@
             </div>
             <div id="statusDiv"></div>
         </div>
+        </div>
+            
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
     </body>
