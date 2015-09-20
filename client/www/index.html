@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="htn2015">
     <head>
         <meta charset="utf-8" />
         <meta name="format-detection" content="telephone=no" />
@@ -9,63 +9,65 @@
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href='http://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="css/font-awesome.min.css">        <link rel="stylesheet" type="text/css" href="css/index.css" />
-        
-        <script type="text/javascript" src="js/angular.min.js"></script>
-        <script type="text/javascript" src="js/angular-touch.js"></script>
-        <script type="text/javascript" src="js/angular-carousel.js"></script>
         <title>Bluetooth Serial Chat</title>
     </head>
     
-    <body ng-app="htn2015" ng-controller="MainCtrl">
+    <body ng-controller="MainCtrl">
         <!--
         <script>
             var duration = 0.5; 
             nativetransitions.fade(duration, onComplete);
         </script>
         -->
-        <ul rn-carousel class="image">
-            <li>
-        <div class="app">
-            <div class="navbar navbar-defult navbar-fixed-top">
-                <div class="container">
-                    <div class="navbar-header">
-                        <h1>MY DEVICES</h1>
-                        <!--<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>-->
-                    </div>
-                </div>
-            </div>
+<nav class="navbar navbar-default navbar-fixed-top background-transparent">
+      <div class="container">
+        <div class="navbar-header">
+            <h1>MY DEVICES</h1>
+            <!--<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>-->
         </div>
-        
-            <div id="mainPage">
-                <ul class="devices">
-                    <li ng-repeat="device in bluetoothList track by $index">
+      </div>
+    </nav>
+<ul class="ulist-wrapper" rn-carousel>
+    <li>
+            <div class="list-wrapper">
+                    <div class="repeat-wrapper top-buffer" ng-repeat="device in bluetoothList track by $index">
                         <div ng-click="addDevice(device.address, $index)" >
-                            <div style="float:left;">{{device.name}}</div>
-                            <div style="text-align:right">{{device.address}}</div>
+                            <div class="pull-right">
+                                <div class="blk">Name:</div>
+                                <div class="blk">{{device.name}}</div>
+                            </div>
+                            <div class="pull-left">
+                                <div class="blk">Mac Address</div>
+                                <div class="blk">{{device.address}}</div>
+                            </div>
                         </div>
-                    </li>
-                </ul>
+                    </div>
             </div>
             </li>
             
-            </li>
+            <li>
         <div class="container w80">
-            <div id="detailPage">
-                <div class="row">
-                    WHERE WOULD YOU LIKE TO GO?
+            <div class="form-wrapper">
+                <div id="detailPage">
+                    <div class="row">
+                        WHERE WOULD YOU LIKE TO GO?
+                    </div>
+                    <div class="row">
+                        <input ng-model="val" type="text" class="form-control"/>
+                    </div>
+                    <div class="row">
+                        <button type="button" class="btn btn-primary btn-block" ng-click="sendData(val)">Go</button>
+                    </div>
+                    <!--<button type="button" class="btn btn-primary" ng-click="getPath()">Disconnect</button>-->
                 </div>
-                <div class="row">
-                    <input ng-model="val" type="text" class="form-control"/>
-                </div>
-                <div class="row">
-                    <button type="button" class="btn btn-primary btn-block" ng-click="sendData(val)">Go</button>
-                </div>
-                <!--<button type="button" class="btn btn-primary" ng-click="getPath()">Disconnect</button>-->
+                <div id="statusDiv"></div>
             </div>
-            <div id="statusDiv"></div>
         </div>
-            </li>
-        </ul>
+    </li>
+</ul>
+        <script src="js/angular.min.js"></script>
+        <script src="js/angular-touch.js"></script>
+        <script src="js/angular-carousel.js"></script>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
     </body>

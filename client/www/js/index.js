@@ -1,6 +1,5 @@
 var app = angular
   .module('htn2015', [
-      'ngTouch',
       'angular-carousel'
   ])
 app.controller('MainCtrl', function ($timeout, $interval, $scope, $http, $rootScope) {
