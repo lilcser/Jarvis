@@ -149,11 +149,12 @@ app.controller('MainCtrl', function ($timeout, $interval, $scope, $http, $rootSc
   $scope.val = "338 King Street North";
   $scope.findPlaces = function(){
         var encodedVal = encodeURIComponent($scope.val);
-        var googleURL = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=" + '' + '&key=APIKEY';
-        var url = startPosition.latitude + ',' + startPosition.longitude + '&radius=' + '50000'
-        https://maps.googleapis.com/maps/api/place/textsearch/xml?query=restaurants+in+Sydney&key=API_KEY
-        https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=500&types=food&name=cruise&key=API_KEY
-        
+        $http({
+          method: 'GET',
+          url: 'https://maps.googleapis.com/maps/api/place/textsearch/json?query='+ $scope.val +'&key=AIzaSyC8BVV9FTVj5K4S5a05ammUKclM4MkIqyo'
+        }).success(function(data){
+          console.log('google places api', data);
+        })
   }
   $scope.getPath = function(){
             var encodedVal = encodeURIComponent($scope.val);
