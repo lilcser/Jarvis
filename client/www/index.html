@@ -22,12 +22,12 @@
 <nav class="navbar navbar-default navbar-fixed-top background-transparent">
       <div class="container">
         <div class="navbar-header">
-            <h1>MY DEVICES</h1>
+            <h1>{{navBarTitle}}</h1>
             <!--<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>-->
         </div>
       </div>
     </nav>
-<ul class="ulist-wrapper" rn-carousel>
+<ul class="ulist-wrapper" rn-carousel rn-carousel-index="carouselIndex">
     <li>
             <div class="list-wrapper">
                     <div class="repeat-wrapper top-buffer" ng-repeat="device in bluetoothList track by $index">
@@ -50,7 +50,7 @@
             <div class="form-wrapper">
                 <div id="detailPage">
                     <div class="row">
-                        WHERE WOULD YOU LIKE TO GO?
+                       “TAKE ONLY MEMORIES, LEAVE ONLY FOOTPRINTS.” <br>– CHIEF SEATTLE</br>
                     </div>
                     <div class="row">
                         <input ng-model="val" type="text" class="form-control"/>
@@ -58,9 +58,11 @@
                     <div class="row">
                         <button type="button" class="btn btn-primary btn-block" ng-click="sendData(val)">Go</button>
                     </div>
-                    <button type="button" class="btn btn-primary" ng-click="getPath()">GetPath</button>
+                    <button type="button" class="btn btn-primary" ng-click="getPath()">Disconnect</button>
                 </div>
-                <div id="statusDiv"></div>
+                
+                <div id="page" rn-carousel-indicatiors ng-if="slides.length> 1" slides="slides"></div>
+                </div>
             </div>
         </div>
     </li>

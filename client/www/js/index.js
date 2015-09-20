@@ -21,11 +21,12 @@ app.controller('MainCtrl', function ($timeout, $interval, $scope, $http, $rootSc
     var currentStep = 0;
     var travelData = [];
     var key = {
-      300left: 'a',
-      300right: 'b',
-      100left: 'c',
-      100right: 'd'
+      threeleft: 'a',
+      threeright: 'b',
+      oneleft: 'c',
+      oneright: 'd'
     }
+    $scope.navBarTitle = "Jarvis"
 // ble.startScan([], function(device) {
 //     console.log(JSON.stringify(device));
 // }, failure);
@@ -70,14 +71,14 @@ app.controller('MainCtrl', function ($timeout, $interval, $scope, $http, $rootSc
       );
     if(distanceRemaining < 0.3){
       if(currentStep + 1 != travelData.length){
-        var dataKey = '300'+direction(travelData[currentStep+1].maneuver);
+        var dataKey = 'three'+direction(travelData[currentStep+1].maneuver);
         $scope.sendData(key.dataKey);
       }
     }
     else if(distanceRemaining < 0.1){
       currentStep++;
       if(currentStep != travelData.length){
-        var dataKey = '100'+direction(travelData[currentStep].maneuver);
+        var dataKey = 'one'+direction(travelData[currentStep].maneuver);
         $scope.sendData(key.dataKey);
         //send maneuver data
       }
@@ -147,6 +148,7 @@ app.controller('MainCtrl', function ($timeout, $interval, $scope, $http, $rootSc
   }
   $scope.val = "338 King Street North";
   $scope.getPath = function(){
+    console.log($scope.carouselIndex);
             var encodedVal = encodeURIComponent($scope.val);
             var googleURL = "https://maps.googleapis.com/maps/api/directions/json?";
             console.log(googleURL + "origin=" + startPosition.latitude + ',' + startPosition.longitude + '&destination=' + encodedVal + '&mode=bicycling&key=AIzaSyC8BVV9FTVj5K4S5a05ammUKclM4MkIqyo')
@@ -178,5 +180,12 @@ app.controller('MainCtrl', function ($timeout, $interval, $scope, $http, $rootSc
     else
       maneuver = 'straight';
 }
-
+  $scope.$watch('carouselIndex', function(){
+    if($scope.carouselIndex == 0){
+      $scope.navBarTitle = 'MY DEVICES';
+    }
+    else if($scope.carouselIndex == 1){
+      $scope.navBarTitle = 'JARVIS';
+    }
+  })
 });
