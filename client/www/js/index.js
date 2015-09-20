@@ -163,10 +163,9 @@ app.controller('MainCtrl', function ($timeout, $interval, $scope, $http, $rootSc
           console.log('google places api', data);
         })
   }
-  $scope.getPath = function(){
+  $scope.getPath = function(resultIndex){
     console.log($scope.carouselIndex);
-            var encodedVal = encodeURIComponent($scope.val);
-            var googleURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=500&types=food&name=cruise&key=AIzaSyC8BVV9FTVj5K4S5a05ammUKclM4MkIqyo";
+            var encodedVal = encodeURIComponent($scope.placesResults[resultIndex].formatted_address);
             console.log(googleURL + "origin=" + startPosition.latitude + ',' + startPosition.longitude + '&destination=' + encodedVal + '&mode=bicycling&key=AIzaSyC8BVV9FTVj5K4S5a05ammUKclM4MkIqyo')
             $http({
               method: 'GET',
