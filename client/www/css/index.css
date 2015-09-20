@@ -1,5 +1,5 @@
 html{
-    height:100%;
+    height:75%;
 }
 body {
     height: 100%;
@@ -22,6 +22,7 @@ ul{
 .w80{
     width:80%;
 }
+
 .navbar-header h1 {
     text-align: center;
     font-size: 25px;
@@ -47,7 +48,6 @@ ul{
     margin: 20px;
 }
 
-
 .floatl{
     float:left;
 }
@@ -60,16 +60,16 @@ ul{
 .ulist-wrapper{
     text-align: left;
     display: block;
-    margin-top:90px;
+    margin-top:25%;
 }
 .form-wrapper{
-    margin-top:90px;
+    margin-top:50px;
 }
 .repeat-wrapper{
     height:60px;
     width:80%;
     color: #161616;
-    margin:auto;
+    margin: auto;
     padding: 10px;
     border: 1px solid #d3d3d3;
     font-size: 0.9em;
