@@ -27,9 +27,9 @@
         </div>
       </div>
     </nav>
-<ul class="ulist-wrapper" rn-carousel rn-carousel-index="carouselIndex">
+<ul class="ulist-wrapper container overflow-y" rn-carousel rn-carousel-index="carouselIndex">
     <li>
-            <div class="list-wrapper">
+            <div class="list-wrapper row" style="height:{{80*bluetoothList.length}}">
                     <div class="repeat-wrapper top-buffer" ng-repeat="device in bluetoothList track by $index">
                         <div ng-click="addDevice(device.address, $index)" >
                             <div class="pull-right">
@@ -48,7 +48,7 @@
     <li>
         <div class="repeat-wrapper top-buffer"></div>
         <div class="container w80">
-            <div class="form-wrapper">
+            <div>
                 <div id="detailPage">
                     <div class="row">
                        “TAKE ONLY MEMORIES, LEAVE ONLY FOOTPRINTS.” <br>– CHIEF SEATTLE</br>

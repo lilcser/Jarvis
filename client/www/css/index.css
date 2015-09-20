@@ -1,5 +1,5 @@
 html{
-    height:75%;
+    height:100%;
 }
 body {
     height: 100%;
@@ -17,8 +17,11 @@ body {
 }
 ul{
     height:100%;
+    margin-bottom:0;
 }
-
+.overflow-y{
+    overflow-y:scroll;
+}
 .w80{
     width:80%;
 }
@@ -60,10 +63,6 @@ ul{
 .ulist-wrapper{
     text-align: left;
     display: block;
-    margin-top:25%;
-}
-.form-wrapper{
-    margin-top:50px;
 }
 .repeat-wrapper{
     height:60px;
