@@ -20,9 +20,9 @@ app.controller('MainCtrl', function ($timeout, $interval, $scope, $http, $rootSc
     var maneuver;
     var offCourse = 0;
     var prevDistance;
-    var currentStep = 0;
+    var currentStep = 1;
     var travelData = [];
-    var key = {
+    var arduinoKey = {
       threeleft: 'a',
       threeright: 'b',
       oneleft: 'c',
@@ -77,17 +77,26 @@ app.controller('MainCtrl', function ($timeout, $interval, $scope, $http, $rootSc
       );
     console.log('distance remaining', distanceRemaining);
     console.log('currentStep', currentStep);
+    console.log('maneuver');
+    var travelDirection = direction(travelData[currentStep].maneuver)
     if(distanceRemaining < 0.3){
       if(currentStep + 1 != travelData.length){
-        var dataKey = 'three'+direction(travelData[currentStep+1].maneuver);
-        $scope.sendData(key.dataKey);
-      }
+        var dataKey = {
+          value: 300,
+          direction: travelDirection
+        }
+          $scope.sendData(dataKey);
+        }
     }
     else if(distanceRemaining < 0.1){
       currentStep++;
+      var travelDirection = direction(travelData[currentStep].maneuver)
       if(currentStep != travelData.length){
-        var dataKey = 'one'+direction(travelData[currentStep].maneuver);
-        $scope.sendData(key.dataKey);
+        var dataKey = {
+          value: 100,
+          direction: travelDirection
+      }
+        $scope.sendData(dataKey);
         //send maneuver data
       }
     }
@@ -95,7 +104,7 @@ app.controller('MainCtrl', function ($timeout, $interval, $scope, $http, $rootSc
       offCourse++;
       if(offCourse >= 10){
         $scope.getPath();
-        currentStep = 0;
+        currentStep = 1;
         offCourse = 0;
       }
     }
@@ -126,6 +135,26 @@ app.controller('MainCtrl', function ($timeout, $interval, $scope, $http, $rootSc
   return deg * (Math.PI/180)
   }
   $scope.sendData = function(data){
+    if(data.value == 100 && data.direction == 'right'){
+      data = 'd';
+    }
+    else if(data.value == 300 && data.direction == 'right'){
+      data = 'b';
+    }
+    else if(data.value == 100 && data.direction == 'left'){
+      data = 'c';
+    }
+    else if(data.value == 300 && data.direction == 'left'){
+      data = 'a';
+    }
+    else if(data.value == 100 && data.direction == 'uturn'){
+      data = 'e';
+    }
+    else if(data.value == 100 && data.direction == 'message'){
+      data = 'f';
+    }
+
+    console.log('sending:', data);
     bluetoothSerial.write(data, success, failure);
 
     function success(){
@@ -143,6 +172,7 @@ app.controller('MainCtrl', function ($timeout, $interval, $scope, $http, $rootSc
     function success(){
         console.log('connected successfully');
         $scope.bluetoothList.splice(index, 1);
+        $scope.carouselIndex = 1;
     }
     function failure(){
         console.log('connection failed');
@@ -209,15 +239,21 @@ app.controller('MainCtrl', function ($timeout, $interval, $scope, $http, $rootSc
     console.log('nextStep', nextStep);
     if(nextStep.indexOf('left') > -1){
       maneuver = 'left';
+      return maneuver
     }
+
     else if(nextStep.indexOf('right') > -1){
       maneuver = 'right';
+      return maneuver   
     }
     else if(nextStep.indexOf('uturn') > -1){
       maneuver = 'uturn';
+      return maneuver
     }
-    else
+    else{
       maneuver = 'straight';
+      console.log(maneuver);
+    }
 }
   $scope.$watch('carouselIndex', function(){
     if($scope.carouselIndex == 0){
