@@ -46,6 +46,7 @@
             </li>
             
     <li>
+        <div class="list-wrapper row"></div>
         <div class="container w80" ng-show="stillSearching">
             <div>
                 <div id="detailPage ">
@@ -53,7 +54,7 @@
                        “TAKE ONLY MEMORIES, LEAVE ONLY FOOTPRINTS.” <br>– CHIEF SEATTLE</br>
                     </div>
                     <div class="row">
-                        <input ng-model="val" type="text" class="form-control"/>
+                        <input id="search" type="text" class="form-control"/>
                     </div>
                     <div class="row">
                         <button type="button" class="btn btn-primary btn-block" ng-click="findPlaces(val)">Go</button>
@@ -64,9 +65,10 @@
                 <div id="page" rn-carousel-indicatiors ng-if="slides.length> 1" slides="slides"></div>
             </div>
         </div>
+
         <div class="list-wrapper row" style="height:{{80*placesResults.length}}" ng-show="!stillSearching">
             <div class="repeat-wrapper top-buffer" ng-repeat="place in placesResults track by $index">
-                <div ng-click="getPath(place.address, $index)" >
+                <div ng-click="getPath(place.formatted_address, $index)" >
                     <div class="pull-left">
                         <div class="blk">Address:</div>
                         <div class="blk">{{place.formatted_address}}</div>

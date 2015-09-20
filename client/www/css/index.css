@@ -22,7 +22,7 @@ ul{
 .overflow-y{
     overflow-y:scroll;
 }
-.w80{
+.container w80{
     width:80%;
 }
 
@@ -49,6 +49,17 @@ ul{
 
 #detailPage div {
     margin: 20px;
+}
+
+#detailpage .row {
+    height:60px;
+    width:80%;
+    color: #161616;
+    margin: auto;
+    padding: 10px;
+    border: 1px solid #d3d3d3;
+    font-size: 0.9em;
+    display: block;
 }
 
 .floatl{

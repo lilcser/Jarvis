@@ -66,14 +66,17 @@ app.controller('MainCtrl', function ($timeout, $interval, $scope, $http, $rootSc
     }
   }
   function onLocationChange(position){
+    console.log('position', position);
     if(travelData.length == 0 || currentStep >= travelData.length)
       return;
     var distanceRemaining = calculateDistance(
       position.coords.latitude,
-      travelData[currentStep].end_location.lat,
       position.coords.longitude,
+      travelData[currentStep].end_location.lat,
       travelData[currentStep].end_location.lng
       );
+    console.log('distance remaining', distanceRemaining);
+    console.log('currentStep', currentStep);
     if(distanceRemaining < 0.3){
       if(currentStep + 1 != travelData.length){
         var dataKey = 'three'+direction(travelData[currentStep+1].maneuver);
@@ -90,7 +93,7 @@ app.controller('MainCtrl', function ($timeout, $interval, $scope, $http, $rootSc
     }
     else if(distanceRemaining > previousDistance){
       offCourse++;
-      if(offCourse >= 5){
+      if(offCourse >= 10){
         $scope.getPath();
         currentStep = 0;
         offCourse = 0;
@@ -105,12 +108,22 @@ app.controller('MainCtrl', function ($timeout, $interval, $scope, $http, $rootSc
     console.log('error on location change');
   }
   // Haversine Formula for calculating distances
-  function calculateDistance(lat1, lat2, lon1, lon2){
-      var dlon = lon2 - lon1 
-      var dlat = lat2 - lat1 
-      var a = (Math.sin(dlat/2))^2 + Math.cos(lat1) * Math.cos(lat2) * (Math.sin(dlon/2))^2 
-      var c = 2 * Math.atan2( Math.sqrt(a), Math.sqrt(1-a) ) 
-      return 6373 * c;
+  function calculateDistance(lat1,lon1,lat2,lon2) {
+  var R = 6371; // Radius of the earth in km
+  var dLat = deg2rad(lat2-lat1); // deg2rad below
+  var dLon = deg2rad(lon2-lon1); 
+  var a = 
+  Math.sin(dLat/2) * Math.sin(dLat/2) +
+  Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+  Math.sin(dLon/2) * Math.sin(dLon/2)
+  ; 
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+  var d = R * c; // Distance in km
+  return d;
+  }
+
+  function deg2rad(deg) {
+  return deg * (Math.PI/180)
   }
   $scope.sendData = function(data){
     bluetoothSerial.write(data, success, failure);
@@ -124,6 +137,7 @@ app.controller('MainCtrl', function ($timeout, $interval, $scope, $http, $rootSc
   }
   $scope.addDevice = function(macAddress, index){
     console.log(macAddress);
+    console.log('attempting to pair device');
     bluetoothSerial.connect(macAddress, success, failure);
 
     function success(){
@@ -151,26 +165,29 @@ app.controller('MainCtrl', function ($timeout, $interval, $scope, $http, $rootSc
         //     console.log('no devices found');
         // }
   }
-  $scope.val = "338 King Street North";
   $scope.findPlaces = function(){
-        var encodedVal = encodeURIComponent($scope.val);
+        var search = document.getElementById('search').value;
+        console.log(search)
+        console.log('#search',search);
+        var encodedVal = encodeURIComponent(search);
         $http({
           method: 'GET',
-          url: 'https://maps.googleapis.com/maps/api/place/textsearch/json?query='+ $scope.val +'&key=AIzaSyC8BVV9FTVj5K4S5a05ammUKclM4MkIqyo'
+          url: 'https://maps.googleapis.com/maps/api/place/textsearch/json?query='+ search +'&key=AIzaSyC8BVV9FTVj5K4S5a05ammUKclM4MkIqyo'
         }).success(function(data){
           $scope.stillSearching = false;
           $scope.placesResults = data.results;
           console.log('google places api', data);
         })
   }
-  $scope.getPath = function(){
-    console.log($scope.carouselIndex);
-            var encodedVal = encodeURIComponent($scope.val);
-            var googleURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=500&types=food&name=cruise&key=AIzaSyC8BVV9FTVj5K4S5a05ammUKclM4MkIqyo";
-            console.log(googleURL + "origin=" + startPosition.latitude + ',' + startPosition.longitude + '&destination=' + encodedVal + '&mode=bicycling&key=AIzaSyC8BVV9FTVj5K4S5a05ammUKclM4MkIqyo')
+  $scope.getPath = function(address, index){
+            console.log('placesresults',$scope.placesResults);
+            console.log('going to ' + address);
+            var encodedVal = encodeURIComponent(address);
+            var googleURL = 'https://maps.googleapis.com/maps/api/directions/json?'
+            console.log(googleURL + "origin=" + startPosition.latitude + ',' + startPosition.longitude + '&destination=' + address + '&mode=bicycling&key=AIzaSyC8BVV9FTVj5K4S5a05ammUKclM4MkIqyo')
             $http({
               method: 'GET',
-              url: googleURL + "origin=" + startPosition.latitude + ',' + startPosition.longitude + '&destination=' + encodedVal + '&mode=bicycling&key=AIzaSyC8BVV9FTVj5K4S5a05ammUKclM4MkIqyo'
+              url: googleURL + "origin=" + startPosition.latitude + ',' + startPosition.longitude + '&destination=' + address + '&mode=bicycling&key=AIzaSyC8BVV9FTVj5K4S5a05ammUKclM4MkIqyo'
             }).success(function(data) {
               console.log("google direction data:", data);
               console.log(SMS);
@@ -189,6 +206,7 @@ app.controller('MainCtrl', function ($timeout, $interval, $scope, $http, $rootSc
   }
 
   function direction(nextStep) {
+    console.log('nextStep', nextStep);
     if(nextStep.indexOf('left') > -1){
       maneuver = 'left';
     }
