@@ -14,6 +14,8 @@ app.controller('MainCtrl', function ($timeout, $interval, $scope, $http, $rootSc
     navigator.geolocation.getCurrentPosition(geoSuccess, geoError, [{enableHighAccuracy: true}]);
     $scope.bluetoothList = [{name: 'HC-05', address:'98:D3:31:50:20:C8'}]
     $scope.travelling = false;
+    $scope.placesResults;
+    $scope.stillSearching = true;
     var startPosition = {};
     var maneuver;
     var offCourse = 0;
@@ -153,6 +155,8 @@ app.controller('MainCtrl', function ($timeout, $interval, $scope, $http, $rootSc
           method: 'GET',
           url: 'https://maps.googleapis.com/maps/api/place/textsearch/json?query='+ $scope.val +'&key=AIzaSyC8BVV9FTVj5K4S5a05ammUKclM4MkIqyo'
         }).success(function(data){
+          $scope.stillSearching = false;
+          $scope.placesResults = data.results;
           console.log('google places api', data);
         })
   }

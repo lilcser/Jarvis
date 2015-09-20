@@ -46,9 +46,9 @@
             </li>
             
     <li>
-        <div class="container w80">
+        <div class="container w80" ng-show="stillSearching">
             <div>
-                <div id="detailPage">
+                <div id="detailPage ">
                     <div class="row">
                        “TAKE ONLY MEMORIES, LEAVE ONLY FOOTPRINTS.” <br>– CHIEF SEATTLE</br>
                     </div>
@@ -56,20 +56,22 @@
                         <input ng-model="val" type="text" class="form-control"/>
                     </div>
                     <div class="row">
-                        <button ng-model="val" type="button" class="btn btn-primary btn-block" ng-click="findPlaces(val)">Go</button>
+                        <button type="button" class="btn btn-primary btn-block" ng-click="findPlaces(val)">Go</button>
                     </div>
                     <button type="button" class="btn btn-primary" ng-click="sendData(val)">Disconnect</button>
                 </div>
                 
                 <div id="page" rn-carousel-indicatiors ng-if="slides.length> 1" slides="slides"></div>
-                </div>
             </div>
         </div>
-    </li>
-    <li>
-        <div class="container">
-            <div class="row">
-                This is an awesome new branch
+        <div class="list-wrapper row" style="height:{{80*placesResults.length}}" ng-show="!stillSearching">
+            <div class="repeat-wrapper top-buffer" ng-repeat="place in placesResults track by $index">
+                <div ng-click="getPath(place.address, $index)" >
+                    <div class="pull-left">
+                        <div class="blk">Address:</div>
+                        <div class="blk">{{place.formatted_address}}</div>
+                    </div>
+                </div>
             </div>
         </div>
     </li>
