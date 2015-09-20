@@ -14,24 +14,23 @@ body {
 .navbar-header h1 {
     text-align: center;
     font-size: 25px;
-    display: inline-block;
+    display: block;
 }
 
 /*.glyphicon glyphicon-refresh {
     display: inline-block;
 }*/
 
-#mainPage {
-    color: #161616;
-    text-align: center;
-    width: 320px;
+.devices {
+    width: 80%;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 90px;
 }
 
 #detailPage {
     text-align:center;
-    font-size: 2em;
+    font-size: 30px;
 }
 
 #detailPage div {
@@ -40,14 +39,18 @@ body {
 
 ul {
     text-align: left;
+    display: block;
 }
 
+
 li {
+    color: #161616;
     margin-left: -40px;
     padding: 10px;
     border: 1px solid #d3d3d3;
     font-size: 0.9em;
     background-color:rgb(192,192,192); opacity: 0.8;
+    display: block;
 }
 #resultDiv {
     font: 16px "Source Sans", helvetica, arial, sans-serif;

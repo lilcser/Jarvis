@@ -5,11 +5,14 @@
         <meta name="format-detection" content="telephone=no" />
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1,  target-densitydpi=device-dpi" />
         
+        <link href="css/angular-carousel.css" rel="stylesheet" type="text/css">
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href='http://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="css/font-awesome.min.css">        <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <script src="js/angular.min.js"></script>
         
+        <script type="text/javascript" src="js/angular.min.js"></script>
+        <script type="text/javascript" src="js/angular-touch.js"></script>
+        <script type="text/javascript" src="js/angular-carousel.js"></script>
         <title>Bluetooth Serial Chat</title>
     </head>
     
@@ -31,10 +34,8 @@
             </div>
         </div>
         
-            </div>
-        
             <div id="mainPage">
-                <ul class="nav nav-tabs">
+                <ul class="devices">
                     <li ng-repeat="device in bluetoothList track by $index">
                         <div ng-click="addDevice(device.address, $index)" >
                             <div style="float:left;">{{device.name}}</div>
@@ -47,13 +48,13 @@
         <div class="container w80" ng-hide="false">
             <div id="detailPage">
                 <div class="row">
-                    Where would you like to go?
+                    WHERE WOULD YOU LIKE TO GO?
                 </div>
                 <div class="row">
                     <input ng-model="val" type="text" class="form-control"/>
                 </div>
                 <div class="row">
-                    <button type="button" class="btn btn-primary btn-block" ng-click="sendData(val)">Send</button>
+                    <button type="button" class="btn btn-primary btn-block" ng-click="sendData(val)">Go</button>
                 </div>
                 <!--<button type="button" class="btn btn-primary" ng-click="getPath()">Disconnect</button>-->
             </div>
