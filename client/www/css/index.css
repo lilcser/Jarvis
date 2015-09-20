@@ -122,3 +122,9 @@ ul{
         padding-top: 15px;
     }
 }
+
+@media screen and (min-height: 283.5px) {
+    body {
+        height: 100%;
+    }
+}
