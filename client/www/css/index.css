@@ -19,6 +19,7 @@ ul{
     height:100%;
     margin-bottom:0;
 }
+
 .overflow-y{
     overflow-y:scroll;
 }
@@ -51,17 +52,6 @@ ul{
     margin: 20px;
 }
 
-#detailpage .row {
-    height:60px;
-    width:80%;
-    color: #161616;
-    margin: auto;
-    padding: 10px;
-    border: 1px solid #d3d3d3;
-    font-size: 0.9em;
-    display: block;
-}
-
 .floatl{
     float:left;
 }
@@ -86,6 +76,16 @@ ul{
     background-color:rgb(192,192,192); opacity: 0.8;
     display: block;
 }
+
+<style>
+.div #text{
+    font-size: 25px;
+    color: #f8f8f8;
+    margin: auto;
+    padding: 10px;
+    text-align: center;
+}
+
 
 .list_wrapper {
     height: 100%;

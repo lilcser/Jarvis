@@ -12,7 +12,6 @@ ul[rn-carousel] {
 }
 
 ul[rn-carousel] > li {
-  color: black;
   backface-visibility: hidden;
   overflow: visible;
   vertical-align: top;
