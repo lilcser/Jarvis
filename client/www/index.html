@@ -56,7 +56,7 @@
                         <input ng-model="val" type="text" class="form-control"/>
                     </div>
                     <div class="row">
-                        <button type="button" class="btn btn-primary btn-block" ng-click="findPlaces(val)">Go</button>
+                        <button ng-model="val" type="button" class="btn btn-primary btn-block" ng-click="findPlaces(val)">Go</button>
                     </div>
                     <button type="button" class="btn btn-primary" ng-click="sendData(val)">Disconnect</button>
                 </div>
