@@ -149,6 +149,7 @@ app.controller('MainCtrl', function ($timeout, $interval, $scope, $http, $rootSc
   $scope.val = "338 King Street North";
   $scope.findPlaces = function(){
         var encodedVal = encodeURIComponent($scope.val);
+        https://maps.googleapis.com/maps/api/place/textsearch/xml?query=restaurants+in+Sydney&key=API_KEY
         
   }
   $scope.getPath = function(){
