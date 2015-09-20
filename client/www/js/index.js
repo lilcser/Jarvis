@@ -26,7 +26,10 @@ app.controller('MainCtrl', function ($timeout, $interval, $scope, $http, $rootSc
       threeleft: 'a',
       threeright: 'b',
       oneleft: 'c',
-      oneright: 'd'
+      oneright: 'd',
+      threeuturn: 'e',
+      oneuturn: 'g',
+      sms: 'f'
     }
     $scope.navBarTitle = "Jarvis"
 // ble.startScan([], function(device) {
@@ -161,29 +164,6 @@ app.controller('MainCtrl', function ($timeout, $interval, $scope, $http, $rootSc
         })
   }
   $scope.getPath = function(){
-            var encodedVal = encodeURIComponent($scope.val);
-            var googleURL = "https://maps.googleapis.com/maps/api/directions/json?";
-            console.log(googleURL + "origin=" + startPosition.latitude + ',' + startPosition.longitude + '&destination=' + encodedVal + '&mode=bicycling&key=AIzaSyC8BVV9FTVj5K4S5a05ammUKclM4MkIqyo')
-            $http({
-              method: 'GET',
-              url: googleURL + "origin=" + startPosition.latitude + ',' + startPosition.longitude + '&destination=' + encodedVal + '&mode=bicycling&key=AIzaSyC8BVV9FTVj5K4S5a05ammUKclM4MkIqyo'
-            }).success(function(data) {
-              console.log("google direction data:", data);
-              console.log(SMS);
-              travelData = data.routes[0].legs[0].steps;
-              console.log(travelData);
-              if(SMS) SMS.startWatch(function(){
-                  console.log('watching started');
-                  document.addEventListener('onSMSArrive', function(e){
-                  console.log('i found a text message!');
-                  });
-              }, function(){
-                  console.log('failed to start watching');
-              });
-            });
-  }
-$scope.val = "338 King Street North";
-  $scope.getPath = function(){
     console.log($scope.carouselIndex);
             var encodedVal = encodeURIComponent($scope.val);
             var googleURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=500&types=food&name=cruise&key=AIzaSyC8BVV9FTVj5K4S5a05ammUKclM4MkIqyo";
@@ -199,7 +179,8 @@ $scope.val = "338 King Street North";
               if(SMS) SMS.startWatch(function(){
                   console.log('watching started');
                   document.addEventListener('onSMSArrive', function(e){
-                  console.log('i found a text message!');
+                    console.log('i found a text message!');
+                    $scope.sendData('f');
                   });
               }, function(){
                   console.log('failed to start watching');
@@ -208,11 +189,14 @@ $scope.val = "338 King Street North";
   }
 
   function direction(nextStep) {
-    if(nextStep.indexOf('left')){
+    if(nextStep.indexOf('left') > -1){
       maneuver = 'left';
     }
-    else if(nextStep.indexOf('right')){
+    else if(nextStep.indexOf('right') > -1){
       maneuver = 'right';
+    }
+    else if(nextStep.indexOf('uturn') > -1){
+      maneuver = 'uturn';
     }
     else
       maneuver = 'straight';
