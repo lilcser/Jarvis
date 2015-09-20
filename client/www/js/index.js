@@ -147,8 +147,15 @@ app.controller('MainCtrl', function ($timeout, $interval, $scope, $http, $rootSc
         // }
   }
   $scope.val = "338 King Street North";
+  $scope.findPlaces = function(){
+        var encodedVal = encodeURIComponent($scope.val);
+        var googleURL = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=" + '' + '&key=APIKEY';
+        var url = startPosition.latitude + ',' + startPosition.longitude + '&radius=' + '50000'
+        https://maps.googleapis.com/maps/api/place/textsearch/xml?query=restaurants+in+Sydney&key=API_KEY
+        https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=500&types=food&name=cruise&key=API_KEY
+        
+  }
   $scope.getPath = function(){
-    console.log($scope.carouselIndex);
             var encodedVal = encodeURIComponent($scope.val);
             var googleURL = "https://maps.googleapis.com/maps/api/directions/json?";
             console.log(googleURL + "origin=" + startPosition.latitude + ',' + startPosition.longitude + '&destination=' + encodedVal + '&mode=bicycling&key=AIzaSyC8BVV9FTVj5K4S5a05ammUKclM4MkIqyo')

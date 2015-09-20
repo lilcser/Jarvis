@@ -46,7 +46,6 @@
             </li>
             
     <li>
-        <div class="repeat-wrapper top-buffer"></div>
         <div class="container w80">
             <div>
                 <div id="detailPage">
@@ -57,13 +56,20 @@
                         <input ng-model="val" type="text" class="form-control"/>
                     </div>
                     <div class="row">
-                        <button type="button" class="btn btn-primary btn-block" ng-click="sendData(val)">Go</button>
+                        <button type="button" class="btn btn-primary btn-block" ng-click="findPlaces(val)">Go</button>
                     </div>
-                    <!--<button type="button" class="btn btn-primary" ng-click="getPath()">Disconnect</button>-->
+                    <button type="button" class="btn btn-primary" ng-click="sendData(val)">Disconnect</button>
                 </div>
                 
                 <div id="page" rn-carousel-indicatiors ng-if="slides.length> 1" slides="slides"></div>
                 </div>
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="container">
+            <div class="row">
+                This is an awesome new branch
             </div>
         </div>
     </li>
