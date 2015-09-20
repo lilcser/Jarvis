@@ -20,6 +20,7 @@ app.controller('MainCtrl', function ($timeout, $interval, $scope, $http, $rootSc
     var prevDistance;
     var currentStep = 0;
     var travelData = [];
+    $scope.navBarTitle = "MY DEVICES"
 // ble.startScan([], function(device) {
 //     console.log(JSON.stringify(device));
 // }, failure);
@@ -131,6 +132,7 @@ app.controller('MainCtrl', function ($timeout, $interval, $scope, $http, $rootSc
   }
   $scope.val = "338 King Street North";
   $scope.getPath = function(){
+    console.log($scope.carouselIndex);
             var encodedVal = encodeURIComponent($scope.val);
             var googleURL = "https://maps.googleapis.com/maps/api/directions/json?";
             console.log(googleURL + "origin=" + startPosition.latitude + ',' + startPosition.longitude + '&destination=' + encodedVal + '&mode=bicycling&key=AIzaSyC8BVV9FTVj5K4S5a05ammUKclM4MkIqyo')
@@ -161,5 +163,12 @@ app.controller('MainCtrl', function ($timeout, $interval, $scope, $http, $rootSc
     else
       maneuver = 'straight';
 }
-
+  $scope.$watch('carouselIndex', function(){
+    if($scope.carouselIndex == 0){
+      $scope.navBarTitle == 'MY DEVICES';
+    }
+    else if($scope.carouselIndex == 1){
+      $scope.navBarTitle == 'JARVIS';
+    }
+  })
 });
