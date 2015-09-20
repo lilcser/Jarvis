@@ -147,8 +147,11 @@ app.controller('MainCtrl', function ($timeout, $interval, $scope, $http, $rootSc
         // }
   }
   $scope.val = "338 King Street North";
+  $scope.findPlaces = function(){
+        var encodedVal = encodeURIComponent($scope.val);
+        
+  }
   $scope.getPath = function(){
-    console.log($scope.carouselIndex);
             var encodedVal = encodeURIComponent($scope.val);
             var googleURL = "https://maps.googleapis.com/maps/api/directions/json?";
             console.log(googleURL + "origin=" + startPosition.latitude + ',' + startPosition.longitude + '&destination=' + encodedVal + '&mode=bicycling&key=AIzaSyC8BVV9FTVj5K4S5a05ammUKclM4MkIqyo')
