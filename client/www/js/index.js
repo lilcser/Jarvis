@@ -20,6 +20,12 @@ app.controller('MainCtrl', function ($timeout, $interval, $scope, $http, $rootSc
     var prevDistance;
     var currentStep = 0;
     var travelData = [];
+    var key = {
+      300left: 'a',
+      300right: 'b',
+      100left: 'c',
+      100right: 'd'
+    }
 // ble.startScan([], function(device) {
 //     console.log(JSON.stringify(device));
 // }, failure);
@@ -30,7 +36,6 @@ app.controller('MainCtrl', function ($timeout, $interval, $scope, $http, $rootSc
 //     function() { console.log("stopScan failed"); }
 // );
   function geoSuccess(position) {
-    var mapEl = document.getElementById('closest-store');
     startPosition.latitude = position.coords.latitude;
     startPosition.longitude = position.coords.longitude;
     console.log(position);
@@ -55,7 +60,7 @@ app.controller('MainCtrl', function ($timeout, $interval, $scope, $http, $rootSc
     }
   }
   function onLocationChange(position){
-    if(travelData.length == 0)
+    if(travelData.length == 0 || currentStep >= travelData.length)
       return;
     var distanceRemaining = calculateDistance(
       position.coords.latitude,
@@ -64,19 +69,30 @@ app.controller('MainCtrl', function ($timeout, $interval, $scope, $http, $rootSc
       travelData[currentStep].end_location.lng
       );
     if(distanceRemaining < 0.3){
-      //todo:flash light
+      if(currentStep + 1 != travelData.length){
+        var dataKey = '300'+direction(travelData[currentStep+1].maneuver);
+        $scope.sendData(key.dataKey);
+      }
     }
     else if(distanceRemaining < 0.1){
-      //todo: flash light
       currentStep++;
+      if(currentStep != travelData.length){
+        var dataKey = '100'+direction(travelData[currentStep].maneuver);
+        $scope.sendData(key.dataKey);
+        //send maneuver data
+      }
     }
-    else if(distanceRemaining > previousDistance)
+    else if(distanceRemaining > previousDistance){
       offCourse++;
       if(offCourse >= 5){
         $scope.getPath();
         currentStep = 0;
         offCourse = 0;
       }
+    }
+    else{
+      //do nothing and wait for he next location update
+    }
 
   }
   function onLocationChangeError(){
@@ -141,6 +157,7 @@ app.controller('MainCtrl', function ($timeout, $interval, $scope, $http, $rootSc
               console.log("google direction data:", data);
               console.log(SMS);
               travelData = data.routes[0].legs[0].steps;
+              console.log(travelData);
               if(SMS) SMS.startWatch(function(){
                   console.log('watching started');
                   document.addEventListener('onSMSArrive', function(e){
